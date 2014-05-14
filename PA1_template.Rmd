@@ -7,7 +7,13 @@ options(scipen = 1, digits = 2)
 ```
 ## Loading and preprocessing the data
 
+Unziping data in archive and reading a file.
 
+```{r}
+unzip("activity.zip")
+raw <- read.csv("activity.csv")
+head(raw)
+```
 
 ## What is mean total number of steps taken per day?
 
