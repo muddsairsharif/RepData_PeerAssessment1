@@ -15,7 +15,7 @@ raw <- read.csv("activity.csv")
 head(raw)
 ```
 
-Convert interval column from integer to character of length 4, with zeroes padded to the front.
+Converting interval level column from int to char of length four, with appending zeroes at the front.
 
 
 ```{r}
@@ -23,14 +23,14 @@ raw <- transform(raw, interval = formatC(interval, width = 4, flag = 0))
 head(raw)
 ```
 
-Make a factor from the interval column and add as a column.
+Make a factor from the interval column and add it as a column.
 
 ```{r}
 raw$interval.factor <- as.factor(raw$interval)
 head(raw)
 ```
 
-Add a column that simplifies and represents the timestamp of the observations.
+Add a column that simplifies and representing the timestamp of the observations.
 
 ```{r}
 raw$timestamp <- strptime(with(raw, paste(date, interval, sep = " ")), "%Y-%m-%d %H%M")
@@ -39,7 +39,7 @@ head(raw)
 
 ## What is mean total number of steps taken per day?
 
-Show a histogram of daily total steps.
+Showing a histogram of daily total steps.
 
 ```{r}
 cumSteps <- tapply(raw$steps, raw$date, sum, na.rm = TRUE)
@@ -58,7 +58,7 @@ Total daily steps:
 
 ## What is the average daily activity pattern?
 
-Now let's look at averages for particular intervals of the day to see, on average, how active the user is at different times of day.
+Now let's look at  averages for specific intervals of the day to see, on average, how active the user is at different times of day.
 
 ```{r}
 intervalMean <- tapply(raw$steps, raw$interval.factor, mean, na.rm = TRUE)
@@ -86,7 +86,7 @@ Calculate the total number of rows with missing entries.
 length(which(!complete.cases(raw$steps, raw$date, raw$interval, raw$interval.factor, raw$timestamp)))
 ```
 
-Specifically notice that only the steps variable has missing values.
+Personally notice that only the steps variable is containing the missing values.
 
 ```{r}
 any(is.na(raw$date))
@@ -95,9 +95,8 @@ any(is.na(raw$timestamp))
 any(is.na(raw$steps))
 ```
 
-Devise a strategy for filling in missing values.
+infitate a strategy for filling in missing values.
 
-Are missing values only through whole days, or do some days have partially missing values?
 
 ```{r}
 naStatus <- tapply(raw$steps, raw$date, is.na)
@@ -200,7 +199,7 @@ summary(filled)
 
 How did filling in missing values affect daily total steps?
 
-Show a histogram of daily total steps.
+Display a histogram of daily total steps.
 
 ```{r}
 cumSteps <- tapply(filled$steps, filled$date, sum, na.rm = FALSE)
